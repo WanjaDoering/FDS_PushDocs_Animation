@@ -243,7 +243,7 @@
     font-weight: 600;
   }
   .source-window .main {
-    padding: 12px 14px;
+    padding: 12px 18px 12px 14px;
   }
   .source-window .tabs {
     display: flex;
@@ -279,10 +279,10 @@
   }
   .source-window .doc-row {
     display: grid;
-    grid-template-columns: 16px 1fr 60px 14px;
+    grid-template-columns: 16px 1fr 60px;
     align-items: center;
     gap: 8px;
-    padding: 6px 4px;
+    padding: 6px 10px 6px 6px;
     border-radius: 5px;
     background: var(--fds-bg-grey);
   }
@@ -469,28 +469,30 @@
            ~10px before the label text.
            Row y: 154, 218, 282, 346. Labels right-aligned, right edge ≈ x=892:
            text starts ≈ Buchhaltung 810 / Cloud Storage 800 / API & Webhook 794 / Transfer 834. -->
-      <path id="p-o1" class="dashed-path" d="M 625 250 C 705 250, 705 154, 785 154 L 800 154" />
-      <path id="p-o2" class="dashed-path" d="M 625 250 C 700 250, 700 218, 775 218 L 790 218" />
-      <path id="p-o3" class="dashed-path" d="M 625 250 C 697 250, 697 282, 769 282 L 784 282" />
-      <path id="p-o4" class="dashed-path" d="M 625 250 C 717 250, 717 346, 809 346 L 824 346" />
+      <!-- All four lines END AT THE SAME x (786), aligned in a vertical column,
+           just before the widest (leftmost-starting) label "API & Webhook" (~794). -->
+      <path id="p-o1" class="dashed-path" d="M 625 250 C 700 250, 700 154, 766 154 L 786 154" />
+      <path id="p-o2" class="dashed-path" d="M 625 250 C 700 250, 700 218, 766 218 L 786 218" />
+      <path id="p-o3" class="dashed-path" d="M 625 250 C 700 250, 700 282, 766 282 L 786 282" />
+      <path id="p-o4" class="dashed-path" d="M 625 250 C 700 250, 700 346, 766 346 L 786 346" />
 
-      <!-- Static dots at the label end of each path -->
-      <circle class="label-dot" cx="800" cy="154" />
-      <circle class="label-dot" cx="790" cy="218" />
-      <circle class="label-dot" cx="784" cy="282" />
-      <circle class="label-dot" cx="824" cy="346" />
+      <!-- Static dots at the (now aligned) end of each path -->
+      <circle class="label-dot" cx="786" cy="154" />
+      <circle class="label-dot" cx="786" cy="218" />
+      <circle class="label-dot" cx="786" cy="282" />
+      <circle class="label-dot" cx="786" cy="346" />
 
       <!-- Flowing dots: 2 per path (inflow + 4 outflows) = 10 dots total -->
       <circle class="flow-dot in1" style="offset-path: path('M 352 250 L 505 250');" />
       <circle class="flow-dot in2" style="offset-path: path('M 352 250 L 505 250');" />
-      <circle class="flow-dot o1a" style="offset-path: path('M 625 250 C 705 250, 705 154, 785 154 L 800 154');" />
-      <circle class="flow-dot o1b" style="offset-path: path('M 625 250 C 705 250, 705 154, 785 154 L 800 154');" />
-      <circle class="flow-dot o2a" style="offset-path: path('M 625 250 C 700 250, 700 218, 775 218 L 790 218');" />
-      <circle class="flow-dot o2b" style="offset-path: path('M 625 250 C 700 250, 700 218, 775 218 L 790 218');" />
-      <circle class="flow-dot o3a" style="offset-path: path('M 625 250 C 697 250, 697 282, 769 282 L 784 282');" />
-      <circle class="flow-dot o3b" style="offset-path: path('M 625 250 C 697 250, 697 282, 769 282 L 784 282');" />
-      <circle class="flow-dot o4a" style="offset-path: path('M 625 250 C 717 250, 717 346, 809 346 L 824 346');" />
-      <circle class="flow-dot o4b" style="offset-path: path('M 625 250 C 717 250, 717 346, 809 346 L 824 346');" />
+      <circle class="flow-dot o1a" style="offset-path: path('M 625 250 C 700 250, 700 154, 766 154 L 786 154');" />
+      <circle class="flow-dot o1b" style="offset-path: path('M 625 250 C 700 250, 700 154, 766 154 L 786 154');" />
+      <circle class="flow-dot o2a" style="offset-path: path('M 625 250 C 700 250, 700 218, 766 218 L 786 218');" />
+      <circle class="flow-dot o2b" style="offset-path: path('M 625 250 C 700 250, 700 218, 766 218 L 786 218');" />
+      <circle class="flow-dot o3a" style="offset-path: path('M 625 250 C 700 250, 700 282, 766 282 L 786 282');" />
+      <circle class="flow-dot o3b" style="offset-path: path('M 625 250 C 700 250, 700 282, 766 282 L 786 282');" />
+      <circle class="flow-dot o4a" style="offset-path: path('M 625 250 C 700 250, 700 346, 766 346 L 786 346');" />
+      <circle class="flow-dot o4b" style="offset-path: path('M 625 250 C 700 250, 700 346, 766 346 L 786 346');" />
     </svg>
 
     <!-- ─── Layer 2: 3-column grid ─── -->
@@ -540,7 +542,6 @@
                     <div class="date">11.06.2026 · 142 KB</div>
                   </div>
                   <div class="status ok">OK</div>
-                  <div class="send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 19V5m-7 7l7-7 7 7"/></svg></div>
                 </div>
                 <div class="doc-row">
                   <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 3v5h5M7 3h7l5 5v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/></svg></div>
@@ -549,7 +550,6 @@
                     <div class="date">10.06.2026 · 218 KB</div>
                   </div>
                   <div class="status ok">OK</div>
-                  <div class="send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 19V5m-7 7l7-7 7 7"/></svg></div>
                 </div>
                 <div class="doc-row">
                   <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 3v5h5M7 3h7l5 5v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/></svg></div>
@@ -558,7 +558,6 @@
                     <div class="date">09.06.2026 · 88 KB</div>
                   </div>
                   <div class="status">Senden</div>
-                  <div class="send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 19V5m-7 7l7-7 7 7"/></svg></div>
                 </div>
               </div>
             </div>
