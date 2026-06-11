@@ -59,10 +59,10 @@ No build step, no fonts to load (uses the system UI font stack), no JS.
 ## Notes / gotchas
 
 - **Connector lines** are an absolutely-positioned `<svg class="lines" viewBox="0 0 1200 500">`
-  with `preserveAspectRatio="none"`. The path endpoints (`L 800 154` etc.) are tuned to land
-  ~10px before each category label. Because label widths depend on the rendered font, if you
-  swap the font you may need to nudge the four outflow path end-x values + matching
-  `label-dot` cx values. They are commented in the SVG.
+  with `preserveAspectRatio="none"`. All four outflow paths end at the same x (786), aligned
+  in a vertical column just before the widest category label. Because label widths depend on
+  the rendered font, if you swap the font you may need to nudge that end-x value (4 paths +
+  4 `label-dot` cx values + the matching `offset-path` strings). They are commented in the SVG.
 - **Flowing dots** use the CSS `offset-path: path(...)` property (Motion Path API). Supported
   in all current evergreen browsers (Chrome/Edge/Safari/Firefox). No fallback needed for
   modern targets; if an old browser is in scope the dots simply won't move (lines still show).
