@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>pushdocs — Animation</title>
+<title>pushdocs — Animated Header Graphic</title>
 <style>
   :root {
     --fds-text: #060608;
@@ -15,92 +15,21 @@
 
   * { box-sizing: border-box; }
 
+  /* Minimal preview shell — when embedding, only the .pushdocs-anim element
+     (plus its styles below) is needed. */
   body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     color: var(--fds-text);
     background: var(--fds-white);
   }
-
-  /* ─── Page mockup chrome (only for preview) ─── */
-  .mockup-page-header {
-    border-bottom: 1px solid var(--fds-grey);
-    padding: 14px 24px;
-    display: flex;
-    align-items: center;
-    gap: 32px;
-    font-size: 13px;
-    color: #5a6273;
-  }
-  .mockup-page-header .brand {
-    font-weight: 700;
-    color: var(--fds-blue);
-    font-size: 18px;
-  }
-  .mockup-breadcrumb {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 18px 24px;
-    font-size: 12px;
-    color: #98a0b0;
-  }
-  .mockup-hero {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 8px 24px 24px;
-  }
-  .mockup-hero .pill {
-    display: inline-block;
-    font-size: 11px;
-    letter-spacing: 0.10em;
-    color: #5a6273;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
-  .mockup-hero h1 {
-    font-size: 32px;
-    line-height: 1.2;
-    margin: 0 0 16px;
-    max-width: 720px;
-  }
-  .mockup-hero p {
-    font-size: 14px;
-    color: var(--fds-text);
-    max-width: 560px;
-    margin: 0 0 20px;
-  }
-  .mockup-hero .cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--fds-blue);
-    color: var(--fds-white);
-    padding: 10px 18px;
-    border-radius: 6px;
-    font-weight: 600;
-    font-size: 14px;
-    text-decoration: none;
-  }
-
-  .mockup-wrap {
+  .preview-shell {
     max-width: 1200px;
     margin: 0 auto;
     padding: 40px 24px;
   }
-  .mockup-section-title {
-    font-size: 28px;
-    font-weight: 700;
-    margin: 0 0 12px;
-    color: var(--fds-text);
-  }
-  .mockup-section-intro {
-    font-size: 15px;
-    color: var(--fds-text);
-    max-width: 720px;
-    margin: 0 0 32px;
-  }
 
-  /* ═══ Animation Container — 1200x500 viewBox ═══ */
+  /* ═══ Animation Container — geometry assumes aspect 12:5 (viewBox 1200x500) ═══ */
   .pushdocs-anim {
     position: relative;
     width: 100%;
@@ -130,7 +59,6 @@
     fill: var(--fds-blue);
     r: 3.5;
   }
-  /* Speed: 30% faster (3s → 2.1s, 3.6s → 2.5s) + doubled count via 2nd dots offset half-cycle */
   .flow-dot.in1  { animation: flow-anim 2.1s linear infinite 0.0s; }
   .flow-dot.in2  { animation: flow-anim 2.1s linear infinite 1.05s; }
   .flow-dot.o1a  { animation: flow-anim 2.5s linear infinite 0.0s; }
@@ -151,6 +79,7 @@
     92%  { opacity: 1; }
     100% { offset-distance: 100%; opacity: 0; }
   }
+  .label-dot { fill: var(--fds-blue); r: 3; }
 
   /* ─── 3-column grid: source / hub / targets ─── */
   .anim-grid {
@@ -163,7 +92,7 @@
     align-items: center;
   }
 
-  /* ─── SOURCE: richer window mockup ─── */
+  /* ─── SOURCE: app window mockup ─── */
   .source-col {
     display: flex;
     justify-content: center;
@@ -322,13 +251,6 @@
     text-transform: uppercase;
   }
   .source-window .doc-row .status.ok { background: rgba(34,139,72,0.14); color: #228b48; }
-  .source-window .doc-row .send {
-    color: var(--fds-blue);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .source-window .doc-row .send svg { width: 12px; height: 12px; }
 
   /* ─── HUB: pushdocs center ─── */
   .hub-col {
@@ -364,13 +286,13 @@
     50%      { box-shadow: 0 0 0 1px var(--fds-grey), 0 14px 44px rgba(0, 59, 134, 0.22); }
   }
 
-  /* ─── TARGETS: 4 category rows, no cycling ─── */
+  /* ─── TARGETS: 4 fixed category rows ─── */
   .targets-col {
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 14px;
-    padding-left: 60px;   /* labels sit further right → more room for the S-curves */
+    padding-left: 60px;   /* labels sit right → room for the S-curves */
     padding-right: 12px;
     height: 100%;
   }
@@ -408,11 +330,6 @@
     object-fit: contain;
     filter: brightness(0);   /* unified black silhouette */
   }
-  /* Inline SVG slot content (Lexware, sevdesk) — already monochrome black */
-  .target-row .slot svg.brand {
-    width: 26px;
-    height: 26px;
-  }
   .target-row .slot .text-logo {
     font-size: 10px;
     font-weight: 800;
@@ -420,7 +337,7 @@
     letter-spacing: 0.02em;
   }
 
-  /* Responsive */
+  /* Responsive: stack vertically on narrow screens, hide connector lines */
   @media (max-width: 760px) {
     .anim-grid { grid-template-columns: 1fr; gap: 28px; padding: 24px 0; }
     .pushdocs-anim { aspect-ratio: auto; min-height: 780px; }
@@ -433,27 +350,7 @@
 </head>
 <body>
 
-<div class="mockup-page-header">
-  <div class="brand">fds</div>
-  <div>Portfolio &nbsp;·&nbsp; Partner &nbsp;·&nbsp; Karriere &nbsp;·&nbsp; Über uns</div>
-</div>
-<div class="mockup-breadcrumb">Portfolio &nbsp;›&nbsp; pushdocs</div>
-<div class="mockup-hero">
-  <div class="pill">PUSHDOCS</div>
-  <h1>Dokumente an Buchhaltungs- und Dateisysteme liefern, ohne jede Schnittstelle selbst zu bauen</h1>
-  <p>pushdocs nimmt Dokumente samt Metadaten entgegen und liefert sie an über 60 Zielsysteme — von Cloud-Speichern bis zur Buchhaltungssoftware.</p>
-  <a href="#" class="cta">Kontakt aufnehmen →</a>
-</div>
-
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- ANIMATION BLOCK START — copy from here for embed             -->
-<!-- ═══════════════════════════════════════════════════════════ -->
-
-<div class="mockup-wrap">
-  <h2 class="mockup-section-title">So funktioniert es</h2>
-  <p class="mockup-section-intro">
-    pushdocs sitzt zwischen Ihrer Anwendung und den Zielsystemen Ihrer Kunden. Drei Schritte vom Dokument bis zur erfolgreichen Zustellung.
-  </p>
+<div class="preview-shell">
 
   <div class="pushdocs-anim">
 
@@ -463,20 +360,18 @@
       <!-- INFLOW: source window right edge (x≈352) → hub left edge (x≈505) -->
       <path id="p-in" class="dashed-path" d="M 352 250 L 505 250" />
 
-      <!-- OUTFLOW: Merge-style long S-curves. Each path leaves the hub horizontally
-           (x=625, y=250), sweeps in ONE smooth cubic with horizontal tangents on both
-           ends (control points at mid-x), and lands horizontally at its row, ending
-           ~10px before the label text.
-           Row y: 154, 218, 282, 346. Labels right-aligned, right edge ≈ x=892:
-           text starts ≈ Buchhaltung 810 / Cloud Storage 800 / API & Webhook 794 / Transfer 834. -->
-      <!-- All four lines END AT THE SAME x (786), aligned in a vertical column,
-           just before the widest (leftmost-starting) label "API & Webhook" (~794). -->
+      <!-- OUTFLOW: Merge-style S-curves with horizontal tangents on both ends.
+           All four paths end at the SAME x (786), aligned in a vertical column,
+           just before the widest category label ("API & Webhook", ~x=794).
+           Row y centers: 154, 218, 282, 346.
+           If the page font changes, label widths shift — nudge the end-x here,
+           on the label-dot cx values, and in the matching offset-path strings. -->
       <path id="p-o1" class="dashed-path" d="M 625 250 C 700 250, 700 154, 766 154 L 786 154" />
       <path id="p-o2" class="dashed-path" d="M 625 250 C 700 250, 700 218, 766 218 L 786 218" />
       <path id="p-o3" class="dashed-path" d="M 625 250 C 700 250, 700 282, 766 282 L 786 282" />
       <path id="p-o4" class="dashed-path" d="M 625 250 C 700 250, 700 346, 766 346 L 786 346" />
 
-      <!-- Static dots at the (now aligned) end of each path -->
+      <!-- Static dots at the aligned end of each path -->
       <circle class="label-dot" cx="786" cy="154" />
       <circle class="label-dot" cx="786" cy="218" />
       <circle class="label-dot" cx="786" cy="282" />
@@ -498,7 +393,7 @@
     <!-- ─── Layer 2: 3-column grid ─── -->
     <div class="anim-grid">
 
-      <!-- SOURCE: richer app mockup -->
+      <!-- SOURCE: app window mockup -->
       <div class="source-col">
         <div class="source-window">
           <div class="titlebar">
@@ -573,7 +468,7 @@
         </div>
       </div>
 
-      <!-- TARGETS: 4 fixed-category rows, 4 logos each, no cycling -->
+      <!-- TARGETS: 4 fixed-category rows, 4 logos each -->
       <div class="targets-col">
 
         <div class="target-row">
@@ -619,11 +514,8 @@
       </div>
     </div>
   </div>
-</div>
 
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- ANIMATION BLOCK END                                          -->
-<!-- ═══════════════════════════════════════════════════════════ -->
+</div>
 
 </body>
 </html>
