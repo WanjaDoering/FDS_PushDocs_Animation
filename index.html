@@ -306,14 +306,60 @@
     letter-spacing: 0.02em;
   }
 
-  /* Responsive: stack vertically on narrow screens, hide connector lines */
+  /* ─── Mobile-only vertical flow connector ───
+     On desktop the horizontal SVG carries the flow; on mobile the columns
+     stack, so we swap in a vertical animated dashed line with downward dots. */
+  .mobile-flow { display: none; }
+
+  /* Responsive: stack vertically on narrow screens, hide horizontal lines,
+     show the vertical connectors instead. */
   @media (max-width: 760px) {
-    .anim-grid { grid-template-columns: 1fr; gap: 28px; padding: 24px 0; }
-    .pushdocs-anim { aspect-ratio: auto; min-height: 780px; }
-    .targets-col { padding-left: 0; align-items: center; }
-    .target-row { grid-template-columns: 130px 1fr; }
+    .anim-grid { grid-template-columns: 1fr; gap: 10px; padding: 24px 0; }
+    .pushdocs-anim { aspect-ratio: auto; min-height: 820px; }
+    .source-col, .hub-col, .targets-col { min-width: 0; }
+    .source-window { width: 100%; max-width: 340px; }
+    .targets-col { padding-left: 0; padding-right: 0; align-items: center; gap: 14px; }
+    .target-row { grid-template-columns: 104px 1fr; gap: 10px; }
+    .target-row .cat-label { font-size: 12px; }
+    .target-row .slots { gap: 7px; }
+    .target-row .slot { width: 40px; height: 40px; }
+    .target-row .slot img { width: 22px; height: 22px; }
     .hub .label { bottom: -24px; }
+    .hub-col { margin: 18px 0 30px; }   /* room for the hub label below the circle */
     svg.lines { display: none; }
+
+    .mobile-flow {
+      display: block;
+      position: relative;
+      width: 2px;
+      height: 52px;
+      margin: 4px auto;
+      background-image: repeating-linear-gradient(to bottom, #c8ccd4 0 4px, transparent 4px 10px);
+      background-size: 2px 10px;
+      animation: mobile-dash 0.7s linear infinite;
+    }
+    .mobile-flow::before,
+    .mobile-flow::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--fds-blue);
+      transform: translateX(-50%);
+      animation: mobile-flow-anim 1.8s linear infinite;
+    }
+    .mobile-flow::after { animation-delay: 0.9s; }
+  }
+  @keyframes mobile-dash {
+    to { background-position-y: 10px; }
+  }
+  @keyframes mobile-flow-anim {
+    0%   { top: -6px;  opacity: 0; }
+    15%  { opacity: 1; }
+    85%  { opacity: 1; }
+    100% { top: 52px;  opacity: 0; }
   }
 </style>
 </head>
@@ -407,6 +453,9 @@
         </div>
       </div>
 
+      <!-- MOBILE-ONLY vertical flow connector (source → hub) -->
+      <div class="mobile-flow" aria-hidden="true"></div>
+
       <!-- HUB: pushdocs logo -->
       <div class="hub-col">
         <div class="hub">
@@ -414,6 +463,9 @@
           <div class="label">pushdocs</div>
         </div>
       </div>
+
+      <!-- MOBILE-ONLY vertical flow connector (hub → targets) -->
+      <div class="mobile-flow" aria-hidden="true"></div>
 
       <!-- TARGETS: 4 fixed-category rows, 4 logos each -->
       <div class="targets-col">
