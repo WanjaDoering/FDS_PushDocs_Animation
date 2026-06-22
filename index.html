@@ -369,6 +369,29 @@
     85%  { opacity: 1; }
     100% { top: 34px;  opacity: 0; }
   }
+
+  /* ─── Reduced motion: freeze into the static poster-frame look ───
+     Users with prefers-reduced-motion get a calm, non-animated version.
+     Dots stop at fixed positions along each path (same frame as the
+     exported pushdocs-animation-*.png posters). No motion, stays crisp. */
+  @media (prefers-reduced-motion: reduce) {
+    .dashed-path, .hub { animation: none !important; }
+    .flow-dot { animation: none !important; opacity: 1 !important; }
+    .flow-dot.in1 { offset-distance: 40% !important; }
+    .flow-dot.in2 { offset-distance: 72% !important; }
+    .flow-dot.o1a { offset-distance: 34% !important; }
+    .flow-dot.o1b { offset-distance: 68% !important; }
+    .flow-dot.o2a { offset-distance: 44% !important; }
+    .flow-dot.o2b { offset-distance: 76% !important; }
+    .flow-dot.o3a { offset-distance: 38% !important; }
+    .flow-dot.o3b { offset-distance: 70% !important; }
+    .flow-dot.o4a { offset-distance: 48% !important; }
+    .flow-dot.o4b { offset-distance: 80% !important; }
+    .mobile-flow { animation: none !important; }
+    .mobile-flow::before, .mobile-flow::after { animation: none !important; opacity: 1 !important; }
+    .mobile-flow::before { top: 8px !important; }
+    .mobile-flow::after { top: 22px !important; }
+  }
 </style>
 </head>
 <body>
